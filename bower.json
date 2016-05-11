@@ -1,0 +1,29 @@
+{
+  "name": "git-metro",
+  "description": "commits log as metro graph library",
+  "main": "main.js",
+  "authors": [
+    "Pavel Flaska"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/pflaska/git-metro",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "underscore": "^1.8.3",
+    "requirejs": "^2.2.0"
+  },
+  "devDependencies": {
+    "jquery": "^2.2.2",
+    "underscore": "^1.8.3",
+    "requirejs": "^2.2.0"
+  }
+}

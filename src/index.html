@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flaska</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script data-main="main" src="libs/requirejs/require.js"></script>
+    </head>
+    <body>
+        <h1>Titel</h1>
+        <script>
+        </script>
+        <svg width='500px' height='500px' viewbox='0 0 500 500'>
+            <defs>
+                <style type="text/css"><![CDATA[
+                    .master {
+                        fill: #FF0000;
+                    }
+                    
+                    circle.master:hover {
+                        stroke: #FF0000;
+                    }
+                    
+                    line.master {
+                        stroke: #FF0000;
+                    }
+                    
+                    path.master {
+                        stroke: #FF0000;
+                        stroke-width: 5;
+                        stroke-dasharray: 8,2;
+                        fill: none;
+                    }
+                    
+                    .branch1 {
+                        fill: #0000FF;
+                    }
+                    
+                    circle.branch1:hover {
+                        stroke: #0000FF;
+                    }
+                    
+                    line.branch1 {
+                        stroke: #0000FF;
+                    }
+                    
+                    path.branch1 {
+                        stroke: #0000FF;
+                        stroke-width: 5;
+                        stroke-dasharray: 12,3;
+                        fill: none;
+                    }
+                    
+                    .branch2 {
+                        fill: #00FF00;
+                    }
+                    
+                    circle.branch2:hover {
+                        stroke: #00FF00;
+                    }
+                    
+                    line.branch2 {
+                        stroke: #00FF00;
+                    }
+                    
+                    path.branch2 {
+                        stroke: #00FF00 ;
+                        stroke-width: 5;
+                        stroke-dasharray: 12,3;
+                        fill: none;
+                    }
+                    
+                    .branch3 {
+                        fill: #C0C000;
+                    }
+                    
+                    circle.branch3:hover {
+                        stroke: #C0C000;
+                    }
+                    
+                    line.branch3 {
+                        stroke: #C0C000;
+                    }
+                    
+                    path.branch3 {
+                        stroke: #C0C0C0 ;
+                        stroke-width: 5;
+                        stroke-dasharray: 12,3;
+                        fill: none;
+                    }
+                    
+                    line {
+                        stroke-width: 5;
+                    }
+                    
+                    circle {
+                        stroke: white;
+                        stroke-width: 2;
+                        r: 15
+                    }
+                    ]]>
+                </style>
+            </defs>
+            <g transform="translate(180, 0)">
+                <line x1="35" y1="0" x2="35" y2="335" class='branch3'/>
+                <path d='M 35 335 v 15 q 0 15 -15 15 h -150 q -15 0 -15 15' class='branch3'/>
+                <!--<path d='M 35 155 v 15 q 0 15 -15 15 H -145' class='branch3'/>-->
+                <circle cx='35' cy='155' class='branch3'/>
+            </g>
+            
+            <g transform="translate(120, 0)">
+                <line x1="35" y1="0" x2="35" y2="215" class='branch2'/>
+                <!--<path d='M 35 215 v 165 q 0 15 -15 15 H -85' class='branch2'/>-->
+                <path d='M 35 215 v 15 q 0 15 -15 15 h -90 q -15 0 -15 15' class='branch2'/>
+                <circle cx='35' cy='215' class='branch2'/>
+            </g>
+            
+            <g transform="translate(60, 0)">
+                <line x1="35" y1="0" x2="35" y2="275" class='branch1'/>
+                <path d='M 35 275 v 15 q 0 15 -15 15 h -30 q -15 0 -15 15' class='branch1'/>
+                <circle cx='35' cy='95' class='branch1'/> 
+                <circle cx='35' cy='275' class='branch1'/>
+            </g>
+            
+            <g transform="translate(0,0)" class="master">
+                <line x1="35" y1="0" x2="35" y2="500" class='master'/>
+                <circle cx='35' cy='35' class='master'/>
+                <circle cx='35' cy='155' class='master'/>
+                <circle cx='35' cy='335' class='master'/>
+                <circle cx='35' cy='395' class='master'/>
+            </g>
+            
+            <g>
+            </g>
+        </svg>
+
+    </body>
+</html>

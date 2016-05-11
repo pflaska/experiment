@@ -1,0 +1,329 @@
+{
+    "commitList": [
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Merge branch 'branchM4'\n",
+            "commitDate": null,
+            "commitId": "2ffbe026ac19f556acb4248c777a11ab09cb909d",
+            "committer": null,
+            "date": 1456482971000,
+            "minimizedCommitId": "2ffbe02",
+            "parents": [
+                "a931c6eb6fbd13a6628028e705dc003236dafcc0",
+                "dd33d2fda6e60b661a878bad2bb231d086de1f52"
+            ],
+            "repository": "grafator.git",
+            "sha": "2ffbe026ac19f556acb4248c777a11ab09cb909d",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M7 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "a931c6eb6fbd13a6628028e705dc003236dafcc0",
+            "committer": null,
+            "date": 1456482964000,
+            "minimizedCommitId": "a931c6e",
+            "parents": [
+                "85d1ce882b5579fccc094087661d848a444a0aa8"
+            ],
+            "repository": "grafator.git",
+            "sha": "a931c6eb6fbd13a6628028e705dc003236dafcc0",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Commit 2 on BranchM4\n",
+            "commitDate": null,
+            "commitId": "dd33d2fda6e60b661a878bad2bb231d086de1f52",
+            "committer": null,
+            "date": 1456482914000,
+            "minimizedCommitId": "dd33d2f",
+            "parents": [
+                "7735a55ea97519bfacf4ac0e0dbf7e8f900dc16e"
+            ],
+            "repository": "grafator.git",
+            "sha": "dd33d2fda6e60b661a878bad2bb231d086de1f52",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Branch from M4 commit\n",
+            "commitDate": null,
+            "commitId": "7735a55ea97519bfacf4ac0e0dbf7e8f900dc16e",
+            "committer": null,
+            "date": 1456482865000,
+            "minimizedCommitId": "7735a55",
+            "parents": [
+                "5bb4f3a9e1ad854b6a9aa6fdb415d6639ac8a7e6"
+            ],
+            "repository": "grafator.git",
+            "sha": "7735a55ea97519bfacf4ac0e0dbf7e8f900dc16e",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M6 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "85d1ce882b5579fccc094087661d848a444a0aa8",
+            "committer": null,
+            "date": 1456481004000,
+            "minimizedCommitId": "85d1ce8",
+            "parents": [
+                "75a791f742c80f9aca9df64805fc5f4fce217dac"
+            ],
+            "repository": "grafator.git",
+            "sha": "85d1ce882b5579fccc094087661d848a444a0aa8",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Merge remote-tracking branch 'guber/branchM2'\n",
+            "commitDate": null,
+            "commitId": "75a791f742c80f9aca9df64805fc5f4fce217dac",
+            "committer": null,
+            "date": 1456480970000,
+            "minimizedCommitId": "75a791f",
+            "parents": [
+                "0ffec371d95c9e0567d8faa6f21627c9996a06a4",
+                "c9ac93248304f93cf7ef0a41479d6858ab50b3b1"
+            ],
+            "repository": "grafator.git",
+            "sha": "75a791f742c80f9aca9df64805fc5f4fce217dac",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Branch from M2 commit. Commit 2\n",
+            "commitDate": null,
+            "commitId": "c9ac93248304f93cf7ef0a41479d6858ab50b3b1",
+            "committer": null,
+            "date": 1456480827000,
+            "minimizedCommitId": "c9ac932",
+            "parents": [
+                "093d1bf03b55d579ac050d86336bcbfc0e8b95ab"
+            ],
+            "repository": "grafator.git",
+            "sha": "c9ac93248304f93cf7ef0a41479d6858ab50b3b1",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Branch from M2 commit.\n",
+            "commitDate": null,
+            "commitId": "093d1bf03b55d579ac050d86336bcbfc0e8b95ab",
+            "committer": null,
+            "date": 1456480785000,
+            "minimizedCommitId": "093d1bf",
+            "parents": [
+                "9c9210310a42e5468f3b4bef3c6672b4c0fd39f4"
+            ],
+            "repository": "grafator.git",
+            "sha": "093d1bf03b55d579ac050d86336bcbfc0e8b95ab",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M5 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "0ffec371d95c9e0567d8faa6f21627c9996a06a4",
+            "committer": null,
+            "date": 1456480344000,
+            "minimizedCommitId": "0ffec37",
+            "parents": [
+                "5bb4f3a9e1ad854b6a9aa6fdb415d6639ac8a7e6"
+            ],
+            "repository": "grafator.git",
+            "sha": "0ffec371d95c9e0567d8faa6f21627c9996a06a4",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M4 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "5bb4f3a9e1ad854b6a9aa6fdb415d6639ac8a7e6",
+            "committer": null,
+            "date": 1456480327000,
+            "minimizedCommitId": "5bb4f3a",
+            "parents": [
+                "4c33f2775d77f1f15ec5ac9b39cf0547cfd3faf4"
+            ],
+            "repository": "grafator.git",
+            "sha": "5bb4f3a9e1ad854b6a9aa6fdb415d6639ac8a7e6",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M3 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "4c33f2775d77f1f15ec5ac9b39cf0547cfd3faf4",
+            "committer": null,
+            "date": 1456480301000,
+            "minimizedCommitId": "4c33f27",
+            "parents": [
+                "9c9210310a42e5468f3b4bef3c6672b4c0fd39f4"
+            ],
+            "repository": "grafator.git",
+            "sha": "4c33f2775d77f1f15ec5ac9b39cf0547cfd3faf4",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M2 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "9c9210310a42e5468f3b4bef3c6672b4c0fd39f4",
+            "committer": null,
+            "date": 1456480278000,
+            "minimizedCommitId": "9c92103",
+            "parents": [
+                "a530c556309b295b7252980dde8d336d8f7a6c6f"
+            ],
+            "repository": "grafator.git",
+            "sha": "9c9210310a42e5468f3b4bef3c6672b4c0fd39f4",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "M1 - Master commit.\n",
+            "commitDate": null,
+            "commitId": "a530c556309b295b7252980dde8d336d8f7a6c6f",
+            "committer": null,
+            "date": 1456480254000,
+            "minimizedCommitId": "a530c55",
+            "parents": [],
+            "repository": "grafator.git",
+            "sha": "a530c556309b295b7252980dde8d336d8f7a6c6f",
+            "stats": null,
+            "type": "COMMIT",
+            "url": null
+        }
+    ]
+}

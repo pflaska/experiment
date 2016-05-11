@@ -1,0 +1,23 @@
+{
+  "name": "git-metro",
+  "version": "0.1.0",
+  "description": "commits log as metro graph library",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "Pavel Flaska",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "gulp": "^3.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pflaska/git-metro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pflaska/git-metro/issues"
+  },
+  "homepage": "https://github.com/pflaska/git-metro#readme"
+}
