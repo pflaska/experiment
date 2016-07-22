@@ -1,9 +1,10 @@
 requirejs.config({
-    baseUrl: 'libs',
+    baseUrl: '.',
     paths: {
-        graph: '../graph',
-        jquery: 'jquery/dist/jquery',
-        underscore: 'underscore/underscore'
+        graph: 'graph',
+        jquery: 'libs/jquery/dist/jquery',
+        underscore: 'libs/underscore/underscore',
+        model: 'model'
     }
 });
 
@@ -14,17 +15,18 @@ requirejs.config({
 main();
 
 function main() {
-      require(["jquery", "graph"], function($, metroGraph) {
+    require(["jquery", "graph"], function ($, metroGraph) {
 
         $.getJSON("data/demodata3.json", {
-        tags: "mount rainier", 
-        tagmode: "any",
-        format: "json"
-      }).done(function(data) {
-          var list = data.commitList;
-          metroGraph.init(list);
-          metroGraph.print();
-      }); 
+            tags: "mount rainier",
+            tagmode: "any",
+            format: "json"
+        }).done(function (data) {
+            var list = data.commitList;
+            var model = metroGraph(list, [{'ref': 'master', 'sha': list[0].sha}]);
+            console.log(model);
+            model.print();
+        });
     });
 
 }
