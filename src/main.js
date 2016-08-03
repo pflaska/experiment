@@ -17,7 +17,7 @@ main();
 function main() {
     require(["jquery", "graph"], function ($, metroGraph) {
 
-        $.getJSON("data/demodata3.json", {
+        $.getJSON("data/demodata4.json", {
             tags: "mount rainier",
             tagmode: "any",
             format: "json"
