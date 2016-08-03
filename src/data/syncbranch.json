@@ -1,0 +1,220 @@
+{
+    "commitList": [
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Merge branch 'syncbranch'\n",
+            "commitDate": null,
+            "commitId": "367d0c268805ad8d342805540c6531803374ff92",
+            "committer": null,
+            "date": 1470219461000,
+            "minimizedCommitId": "367d0c2",
+            "parents": [
+                "723f11114ac9dd6a74899f15f8e2bed215c78513",
+                "02c85b257114af9ba656b4d58c0769bce31979a0"
+            ],
+            "repository": "demosync.git",
+            "sha": "367d0c268805ad8d342805540c6531803374ff92",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "m4 commit\n",
+            "commitDate": null,
+            "commitId": "723f11114ac9dd6a74899f15f8e2bed215c78513",
+            "committer": null,
+            "date": 1470219435000,
+            "minimizedCommitId": "723f111",
+            "parents": [
+                "eec71a56497b80b64aabc0a6b8d27499745b370a"
+            ],
+            "repository": "demosync.git",
+            "sha": "723f11114ac9dd6a74899f15f8e2bed215c78513",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "syncbranch commit II\n",
+            "commitDate": null,
+            "commitId": "02c85b257114af9ba656b4d58c0769bce31979a0",
+            "committer": null,
+            "date": 1470219400000,
+            "minimizedCommitId": "02c85b2",
+            "parents": [
+                "dde2af2e5348dc346d1d26dfc36a5cfeada65682"
+            ],
+            "repository": "demosync.git",
+            "sha": "02c85b257114af9ba656b4d58c0769bce31979a0",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Merge branch 'master' into syncbranch\n",
+            "commitDate": null,
+            "commitId": "dde2af2e5348dc346d1d26dfc36a5cfeada65682",
+            "committer": null,
+            "date": 1470219371000,
+            "minimizedCommitId": "dde2af2",
+            "parents": [
+                "a5a6458322846d274d081ac7a72676204fa5b209",
+                "eec71a56497b80b64aabc0a6b8d27499745b370a"
+            ],
+            "repository": "demosync.git",
+            "sha": "dde2af2e5348dc346d1d26dfc36a5cfeada65682",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "m3 commit\n",
+            "commitDate": null,
+            "commitId": "eec71a56497b80b64aabc0a6b8d27499745b370a",
+            "committer": null,
+            "date": 1470219363000,
+            "minimizedCommitId": "eec71a5",
+            "parents": [
+                "bbacf509fa7fd4153e34f28c81e3acc7477aa1cb"
+            ],
+            "repository": "demosync.git",
+            "sha": "eec71a56497b80b64aabc0a6b8d27499745b370a",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "m2 commit\n",
+            "commitDate": null,
+            "commitId": "bbacf509fa7fd4153e34f28c81e3acc7477aa1cb",
+            "committer": null,
+            "date": 1470219355000,
+            "minimizedCommitId": "bbacf50",
+            "parents": [
+                "96b44bec0e4cd17d20811d78872b8cf36d6c5c9c"
+            ],
+            "repository": "demosync.git",
+            "sha": "bbacf509fa7fd4153e34f28c81e3acc7477aa1cb",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "syncbranch commit\n",
+            "commitDate": null,
+            "commitId": "a5a6458322846d274d081ac7a72676204fa5b209",
+            "committer": null,
+            "date": 1470219315000,
+            "minimizedCommitId": "a5a6458",
+            "parents": [
+                "96b44bec0e4cd17d20811d78872b8cf36d6c5c9c"
+            ],
+            "repository": "demosync.git",
+            "sha": "a5a6458322846d274d081ac7a72676204fa5b209",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "m1 commit\n",
+            "commitDate": null,
+            "commitId": "96b44bec0e4cd17d20811d78872b8cf36d6c5c9c",
+            "committer": null,
+            "date": 1470219282000,
+            "minimizedCommitId": "96b44be",
+            "parents": [
+                "baf520d23b9756dba9185bf242ca4f8d9da57d11"
+            ],
+            "repository": "demosync.git",
+            "sha": "96b44bec0e4cd17d20811d78872b8cf36d6c5c9c",
+            "stats": null,
+            "type": "COMMIT"
+        },
+        {
+            "author": {
+                "email": "Pavel.Flaska@oracle.com",
+                "firstName": "Pavel",
+                "gravatarHash": "34c94ddfc1875670c004c924baabfc0a",
+                "id": null,
+                "lastName": "Fla\u0161ka",
+                "username": "Pavel.Flaska@oracle.com"
+            },
+            "changes": null,
+            "comment": "Initial master!\n",
+            "commitDate": null,
+            "commitId": "baf520d23b9756dba9185bf242ca4f8d9da57d11",
+            "committer": null,
+            "date": 1470219259000,
+            "minimizedCommitId": "baf520d",
+            "parents": [],
+            "repository": "demosync.git",
+            "sha": "baf520d23b9756dba9185bf242ca4f8d9da57d11",
+            "stats": null,
+            "type": "COMMIT"
+        }
+    ]
+}
