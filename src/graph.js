@@ -37,8 +37,8 @@ init = function(log, branches) {
         },
         
         className: function(index) {
-            var colors = [ 'master', 'branch1', 'branch2', 'branch3'];
-            return index > 3 ? 'unknown' : colors[index];
+            var colors = [ 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3' ];
+            return index > 22 ? 'unknown' : colors[index];
         },
         
         commitExt: function(commit, laneIndex) {
@@ -88,13 +88,6 @@ init = function(log, branches) {
                 }
             };
             
-//            if (!ref) {
-//                _.findIndex(this.lanes, function(lane) {
-///                    _.(lane.parents, function() {
-//                        
-//                    })
-//                });
-//            }
             this.lanes.push(newLane);
             
             return newLane;
@@ -192,17 +185,8 @@ generateStyle = function(model) {
 generateDom = function(model) {
     var svgns   = "http://www.w3.org/2000/svg";
     var svg = getSvg();
-//    var a = document.createElementNS(svgns, "circle");
-//    a.setAttribute("cx","30");
-//    a.setAttribute("cy","30");
-//    a.setAttribute("fill", "#FF0000");
-//    a.setAttribute("fill", "#FF0000");
-//    a.setAttribute("r", "5");
 
-//    svg.appendChild(a);
-//    var reverselanes = model.lanes.slice().reverse();
     _.each(model.lanes, function(lane) {
-        //  <line x1="35" y1="0" x2="35" y2="275" class='branch1'/>
         var from = lane.start.next.seq;
         var to = lane.end.seq;
         
@@ -218,22 +202,18 @@ generateDom = function(model) {
         line.setAttribute("y2", y2);
         $(line).appendTo(svg);
         
-        // <path d='M 35 215 v 165 q 0 15 -15 15 H -85' class='branch2'/>
         if (lane.laneIndex) {
             // merge point!!!
-//            console.log(lane.start.lane);
             var path = document.createElementNS(svgns, "path");
             path.setAttribute("d", "M " + x1 + " " + y1 + " v -15 q 0 -15 -15 -15 h -" + (lane.laneIndex * RENDER_CONSTANTS.step_x - 30 + lane.start.lane * RENDER_CONSTANTS.step_x) + " 0 q -15 0 -15 -15");
             path.setAttribute("class", model.className(lane.laneIndex));
             $(path).appendTo(svg);
             if (lane.end.fork) {
                 path = document.createElementNS(svgns, "path");
-    //            path.setAttribute("d", "M " + x1 + " " + y2 + " H " + lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + " V " + (lane.end.fork.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y));
                 path.setAttribute("d", "M " + x1 + " " + y2 + " v " + (((lane.end.fork.seq - lane.end.seq) * 60) - 45) +
                         "q 0 15 -15 15" + 
                         " H " + (lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + 15) + 
                         " q -15 0 -15 15");
-                        //" V " + (lane.end.fork.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y));
                 path.setAttribute("class", model.className(lane.laneIndex));
                 $(path).appendTo(svg);
             }
@@ -244,18 +224,38 @@ generateDom = function(model) {
     _.each(model.log, function(commit) {
 
         var commitElement = document.createElementNS(svgns, "circle");
-        commitElement.setAttribute("cx", commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x);
-        commitElement.setAttribute("cy", commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y);
+        var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+        var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+        commitElement.setAttribute("cx", cx);
+        commitElement.setAttribute("cy", cy);
         commitElement.setAttribute("class", model.className(commit.lane));
         commitElement.setAttribute("id", commit.seq);
         commitElement.setAttribute("commit", commit.minimizedCommitId);
-        var lane = model.lanes[commit.lane];
-        
-        if (lane.start.commitId && lane.start.commitId === commit.commitId) {
+        if (commit.parents && commit.parents.length > 1) {
+            var secondParent =  findCommit(model.log, commit.parents[1]);
+            var sx = secondParent.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+            var sy = secondParent.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+            
+            path = document.createElementNS(svgns, "path");
+            path.setAttribute("d", "M " + cx + " " + cy + " L " + sx + " " + sy); // + (((commit.seq - secondParent.seq) * 60) - 45) +
+                    // "q 0 15 -15 15" + 
+                    //" H " + (lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + 15) + 
+                    //" q -15 0 -15 15");
+            path.setAttribute("class", model.className(lane.laneIndex));
+            $(path).appendTo(svg);
+            
         }
         $(commitElement).appendTo(svg);
     });
 };
+
+function findCommit(log, commitId) {
+    var result = _.find(log, function(commit) {
+        return commit.commitId === commitId;
+    });
+    console.log(result);
+    return result;
+}
 
 dump = function(model) {
     console.groupCollapsed("metro-graph-model");
@@ -277,25 +277,6 @@ var lane = {
     visible: true, /* lane visible? */
     label: '' /* ref name, represents item from roots */
 };
-
-//init = function(log, branches) {
-//    var metroGraph = {};
-//
-//    metroGraph.model = {
-//        roots: branches, // array of { 'ref' 'sha' } objects
-//        lanes: {
-//            
-//        }
-//    };
-//    
-//    metroGraph.log = log;
-//    metroGraph.line = $.proxy(line, metroGraph);
-////    console.log(branches);
-//    metroGraph.lines = [ metroGraph.log[0].commitId ];
-//    return {
-//        'print': $.proxy(print, metroGraph)
-//    };
-//};
 
 function print() {
     console.group("metro-graph-old");
