@@ -1,9 +1,13 @@
 define([
     "underscore",
-    "jquery"
+    "jquery",
+    
+    "text!./styles.css"
 ], function (
     _,
-    $
+    $,
+    
+    styles
 ) {
 
 init = function(log, branches) {
@@ -130,6 +134,7 @@ init = function(log, branches) {
             lane.end.fork = found;
         }
     });
+    svgViewGenerate(model);
     
     /// old stuff ///
     var m = {};
@@ -139,7 +144,7 @@ init = function(log, branches) {
     m.lines = [ m.log[0].commitId ];
     //dump(m);
     dump2(model);
-    generateDom(model);
+    
     
     return {
         'print': $.proxy(print, m)
@@ -185,8 +190,9 @@ generateStyle = function(model) {
 var svgns   = "http://www.w3.org/2000/svg";
 var svg = getSvg();
 
-generateDom = function(model) {
-
+svgViewGenerate = function(model) {
+    createStyleDefs();
+    
     _.each(model.lanes, function(lane) {
         var from = lane.start.next.seq;
         var to = lane.end.seq;
@@ -246,26 +252,40 @@ generateDom = function(model) {
     });
 };
 
+
 /**
  * Creates a commit point in graph based on provided commit
  * 
  * @param {type} commit      commit to show
- * @returns {commitElement}  svg commit element circle
+ * @param {type} model       log model
+ * @returns {element}  svg commit element circle
  */
 function createCommitElement(commit, model) {
-    var commitElement = document.createElementNS(svgns, "circle");
+    var element = document.createElementNS(svgns, "circle");
     
     var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
     var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-    commitElement.setAttribute("cx", cx);
-    commitElement.setAttribute("cy", cy);
-    commitElement.setAttribute("class", model.className(commit.lane));
-    commitElement.setAttribute("id", commit.seq);
-    commitElement.setAttribute("commit", commit.minimizedCommitId);
+    element.setAttribute("cx", cx);
+    element.setAttribute("cy", cy);
+    element.setAttribute("class", model.className(commit.lane));
+    element.setAttribute("id", commit.seq);
+    element.setAttribute("commit", commit.minimizedCommitId);
     
-    return commitElement;
+    return element;
 }
 
+
+function createStyleDefs(count) {
+    // TODO pf: shouldn't be in ![CDATA[ ]]>
+    var defs = document.createElementNS(svgns, "defs");
+    var element = document.createElementNS(svgns, "style");
+    element.type = "text/css";
+    element.textContent = styles;
+    getSvg().append(defs);
+    $(defs).append(element);
+}
+function createLineElement(commit, model) {
+}
 function findCommit(log, commitId) {
     var result = _.find(log, function(commit) {
         return commit.commitId === commitId;

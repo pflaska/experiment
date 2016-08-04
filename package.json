@@ -11,7 +11,8 @@
   "devDependencies": {
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
-    "gulp-main-bower-files": "^1.5.2"
+    "gulp-main-bower-files": "^1.5.2",
+    "text": "github:requirejs/text"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,9 @@ requirejs.config({
         graph: 'graph',
         jquery: 'libs/jquery/dist/jquery',
         underscore: 'libs/underscore/underscore',
-        model: 'model'
+        text: 'libs/text/text',
+        model: 'model',
+        
     }
 });
 
