@@ -21,7 +21,6 @@ init = function(log, branches) {
         /**
          * index of lanes in use
          */
-        
         currentLane: 0,
         /**
          * Commit index
@@ -194,65 +193,70 @@ svgViewGenerate = function(model) {
     createStyleDefs();
     
     _.each(model.lanes, function(lane) {
-        var from = lane.start.next.seq;
-        var to = lane.end.seq;
+        var groupElement = createGroupElement(lane, model);
+        $(groupElement).appendTo(svg);
         
-        var line = document.createElementNS(svgns, "line"); 
-        line.setAttribute("class", model.className(lane.laneIndex));
+        var lineElement = createLineElement(lane, model);
+        $(lineElement).appendTo(groupElement);
         
-        var x1 = lane.laneIndex * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
-        var y1 = from * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-        var y2 = to * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-        line.setAttribute("x1", x1);
-        line.setAttribute("x2", x1);
-        line.setAttribute("y1", y1);
-        line.setAttribute("y2", y2);
-        $(line).appendTo(svg);
-        
-        if (lane.laneIndex) {
-            // merge point!!!
-            var path = document.createElementNS(svgns, "path");
-            path.setAttribute("d", "M " + x1 + " " + y1 + " v -15 q 0 -15 -15 -15 h -" + (lane.laneIndex * RENDER_CONSTANTS.step_x - 30 + lane.start.lane * RENDER_CONSTANTS.step_x) + " 0 q -15 0 -15 -15");
-            path.setAttribute("class", model.className(lane.laneIndex));
+        if (lane.laneIndex && lane.end.fork) {
+            var path = createForkPath(lane, model);
             $(path).appendTo(svg);
-            if (lane.end.fork) {
-                path = document.createElementNS(svgns, "path");
-                path.setAttribute("d", "M " + x1 + " " + y2 + " v " + (((lane.end.fork.seq - lane.end.seq) * 60) - 45) +
-                        "q 0 15 -15 15" + 
-                        " H " + (lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + 15) + 
-                        " q -15 0 -15 15");
-                path.setAttribute("class", model.className(lane.laneIndex));
-                $(path).appendTo(svg);
-            }
         }
-        
-        
     });
+
     _.each(model.log, function(commit) {
         var commitElement = createCommitElement(commit, model);
-        
+        // TODO pf: not supporting third and more parents now in prototype!
+        // This has to be finished for release version!
         if (commit.parents && commit.parents.length > 1) {
-            var secondParent =  findCommit(model.log, commit.parents[1]);
-            var sx = secondParent.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
-            var sy = secondParent.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-            
-            var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
-            var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-
-            path = document.createElementNS(svgns, "path");
-            path.setAttribute("d", "M " + cx + " " + cy + " L " + sx + " " + sy); // + (((commit.seq - secondParent.seq) * 60) - 45) +
-                    // "q 0 15 -15 15" + 
-                    //" H " + (lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + 15) + 
-                    //" q -15 0 -15 15");
-            path.setAttribute("class", model.className(lane.laneIndex));
-            $(path).appendTo(svg);
-            
+            // merge point!!!
+            var mergePath = createMergePath(commit, model);
+            $(mergePath).appendTo($("g." + model.className(commit.lane)));
         }
-        $(commitElement).appendTo(svg);
+        $(commitElement).appendTo($("g." + model.className(commit.lane)));
     });
 };
 
+function createMergePath(commit, model) {
+//            var x1 = lane.laneIndex * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+//            var y1 = from * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+//            path.setAttribute("d", "M " + x1 + " " + y1 + " v -15 q 0 -15 -15 -15 h -" + (lane.laneIndex * RENDER_CONSTANTS.step_x - 30 + lane.start.lane * RENDER_CONSTANTS.step_x) + " 0 q -15 0 -15 -15");
 
+    var secondParent = findCommit(model.log, commit.parents[1]);
+
+    var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+    var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+
+    var path = document.createElementNS(svgns, "path");
+
+    var pm = secondParent.lane > commit.lane ? "+" : "-";
+    var hstep = Math.abs(commit.lane * RENDER_CONSTANTS.step_x - 30 + secondParent.lane * RENDER_CONSTANTS.step_x);
+    path.setAttribute("d", "M " + cx + " " + (cy + 15) +
+        " q 0 15 " + pm + "15 15 h " + pm + hstep +  " q " + pm + "15 0 " + pm + "15 15 v 15");
+
+    var cls = model.className(secondParent.lane);
+    path.setAttribute("class", cls);
+
+    return path;
+};
+
+function createForkPath(lane, model) {
+    var path = document.createElementNS(svgns, "path");
+
+    var to = lane.end.seq;
+    var x1 = lane.laneIndex * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+    var y2 = to * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+
+    path.setAttribute("d", "M " + x1 + " " + y2 + " v " + (((lane.end.fork.seq - lane.end.seq) * 60) - 45) +
+            "q 0 15 -15 15" +
+            " H " + (lane.end.fork.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x + 15) +
+            " q -15 0 -15 15");
+    path.setAttribute("class", model.className(lane.laneIndex));
+
+    return path;
+
+}
 /**
  * Creates a commit point in graph based on provided commit
  * 
@@ -274,8 +278,14 @@ function createCommitElement(commit, model) {
     return element;
 }
 
+function createGroupElement(lane, model) {
+    var element = document.createElementNS(svgns, "g");
+    element.setAttribute("class", model.className(lane.laneIndex));
 
-function createStyleDefs(count) {
+    return element;
+}
+
+function createStyleDefs() {
     // TODO pf: shouldn't be in ![CDATA[ ]]>
     var defs = document.createElementNS(svgns, "defs");
     var element = document.createElementNS(svgns, "style");
@@ -284,8 +294,26 @@ function createStyleDefs(count) {
     getSvg().append(defs);
     $(defs).append(element);
 }
-function createLineElement(commit, model) {
+
+function createLineElement(lane, model) {
+    var element = document.createElementNS(svgns, "line");
+    element.setAttribute("class", model.className(lane.laneIndex));
+
+    var from = lane.start.next.seq;
+    var to = lane.end.seq;
+
+    var x = lane.laneIndex * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+    var y1 = from * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+    var y2 = to * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+
+    element.setAttribute("x1", x);
+    element.setAttribute("x2", x);
+    element.setAttribute("y1", y1);
+    element.setAttribute("y2", y2);
+
+    return element;
 }
+
 function findCommit(log, commitId) {
     var result = _.find(log, function(commit) {
         return commit.commitId === commitId;
