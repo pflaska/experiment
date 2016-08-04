@@ -182,9 +182,10 @@ generateStyle = function(model) {
     // generate class style!
 };
 
+var svgns   = "http://www.w3.org/2000/svg";
+var svg = getSvg();
+
 generateDom = function(model) {
-    var svgns   = "http://www.w3.org/2000/svg";
-    var svg = getSvg();
 
     _.each(model.lanes, function(lane) {
         var from = lane.start.next.seq;
@@ -222,20 +223,16 @@ generateDom = function(model) {
         
     });
     _.each(model.log, function(commit) {
-
-        var commitElement = document.createElementNS(svgns, "circle");
-        var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
-        var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-        commitElement.setAttribute("cx", cx);
-        commitElement.setAttribute("cy", cy);
-        commitElement.setAttribute("class", model.className(commit.lane));
-        commitElement.setAttribute("id", commit.seq);
-        commitElement.setAttribute("commit", commit.minimizedCommitId);
+        var commitElement = createCommitElement(commit, model);
+        
         if (commit.parents && commit.parents.length > 1) {
             var secondParent =  findCommit(model.log, commit.parents[1]);
             var sx = secondParent.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
             var sy = secondParent.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
             
+            var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+            var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+
             path = document.createElementNS(svgns, "path");
             path.setAttribute("d", "M " + cx + " " + cy + " L " + sx + " " + sy); // + (((commit.seq - secondParent.seq) * 60) - 45) +
                     // "q 0 15 -15 15" + 
@@ -248,6 +245,26 @@ generateDom = function(model) {
         $(commitElement).appendTo(svg);
     });
 };
+
+/**
+ * Creates a commit point in graph based on provided commit
+ * 
+ * @param {type} commit      commit to show
+ * @returns {commitElement}  svg commit element circle
+ */
+function createCommitElement(commit, model) {
+    var commitElement = document.createElementNS(svgns, "circle");
+    
+    var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+    var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
+    commitElement.setAttribute("cx", cx);
+    commitElement.setAttribute("cy", cy);
+    commitElement.setAttribute("class", model.className(commit.lane));
+    commitElement.setAttribute("id", commit.seq);
+    commitElement.setAttribute("commit", commit.minimizedCommitId);
+    
+    return commitElement;
+}
 
 function findCommit(log, commitId) {
     var result = _.find(log, function(commit) {
