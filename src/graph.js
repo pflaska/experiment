@@ -145,12 +145,12 @@ init = function(log, branches) {
     //dump(m);
     dump2(model);
     
+    console.profileEnd("metro-graph-profile");
     
     return {
         'print': $.proxy(print, m)
     };
     /// old stuff ///
-    console.profileEnd("metro-graph-profile");
 };
 
 function isRoot(commit, roots) {
