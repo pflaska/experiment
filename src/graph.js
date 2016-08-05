@@ -7,6 +7,7 @@ define([
 ) {
 
 init = function(log, branches) {
+    console.profile("metro-graph-profile");
     var model = {
         
         /**
@@ -22,7 +23,7 @@ init = function(log, branches) {
         /**
          * Commit index
          */
-        
+         
         commitIndex: 0,
         
         log: log,
@@ -145,6 +146,7 @@ init = function(log, branches) {
         'print': $.proxy(print, m)
     };
     /// old stuff ///
+    console.profileEnd("metro-graph-profile");
 };
 
 function isRoot(commit, roots) {
