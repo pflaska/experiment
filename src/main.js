@@ -5,8 +5,7 @@ requirejs.config({
         jquery: 'libs/jquery/dist/jquery',
         underscore: 'libs/underscore/underscore',
         text: 'libs/text/text',
-        model: 'model',
-        
+        model: 'model'
     }
 });
 
@@ -19,7 +18,7 @@ main();
 function main() {
     require(["jquery", "graph"], function ($, metroGraph) {
 
-        $.getJSON("data/syncbranch.json", {
+        $.getJSON("data/demodata4.json", {
             tags: "mount rainier",
             tagmode: "any",
             format: "json"

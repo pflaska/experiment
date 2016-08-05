@@ -219,10 +219,6 @@ svgViewGenerate = function(model) {
 };
 
 function createMergePath(commit, model) {
-//            var x1 = lane.laneIndex * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
-//            var y1 = from * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
-//            path.setAttribute("d", "M " + x1 + " " + y1 + " v -15 q 0 -15 -15 -15 h -" + (lane.laneIndex * RENDER_CONSTANTS.step_x - 30 + lane.start.lane * RENDER_CONSTANTS.step_x) + " 0 q -15 0 -15 -15");
-
     var secondParent = findCommit(model.log, commit.parents[1]);
 
     var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
