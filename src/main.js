@@ -18,15 +18,13 @@ main();
 function main() {
     require(["jquery", "graph"], function ($, metroGraph) {
 
-        $.getJSON("data/demodata4.json", {
+        $.getJSON("data/demodata3.json", {
             tags: "mount rainier",
             tagmode: "any",
             format: "json"
         }).done(function (data) {
             var list = data.commitList;
-            var model = metroGraph(list, [{'ref': 'master', 'sha': list[0].sha}]);
-            console.log(model);
-            model.print();
+            metroGraph(list, [{'ref': 'master', 'sha': list[0].sha}]);
         });
     });
 

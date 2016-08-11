@@ -11,7 +11,7 @@ define([
 ) {
 
 init = function(log, branches) {
-    console.profile("metro-graph-profile");
+    // console.profile("metro-graph-profile");
     var model = {
         
         /**
@@ -31,6 +31,8 @@ init = function(log, branches) {
         
         log: log,
         
+        runningLanes: [],
+        
         /**
          * Get the next lane index
          * 
@@ -41,7 +43,11 @@ init = function(log, branches) {
         },
         
         className: function(index) {
-            var colors = [ 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2', 'branch3' ];
+            var colors = [ 'master', 'branch1', 'branch2', 'branch3', 'master',
+                'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2',
+                'branch3', 'master', 'branch1', 'branch2', 'branch3', 'master',
+                'branch1', 'branch2', 'branch3', 'master', 'branch1', 'branch2',
+                'branch3' ];
             return index > 22 ? 'unknown' : colors[index];
         },
         
@@ -136,21 +142,7 @@ init = function(log, branches) {
     });
     svgViewGenerate(model);
     
-    /// old stuff ///
-    var m = {};
-    m.roots = branches;
-    m.log = log;
-    m.line = $.proxy(line, m);
-    m.lines = [ m.log[0].commitId ];
-    //dump(m);
-    dump2(model);
-    
-    console.profileEnd("metro-graph-profile");
-    
-    return {
-        'print': $.proxy(print, m)
-    };
-    /// old stuff ///
+    // console.profileEnd("metro-graph-profile");
 };
 
 function isRoot(commit, roots) {
@@ -158,19 +150,6 @@ function isRoot(commit, roots) {
        return root.sha === commit.sha; 
     });
 }
-
-dump2 = function(model) {
-    console.group("metro-graph-model");
-    _.each(model.log, function(c) {
-        var item = " " + c.minimizedCommitId + " " + c.comment.split('\n')[0];
-        if (c.mergeLanes) item = " (merge " + c.mergeLanes.toString() + ")" + item;
-        if (c.ref) item = " (" + c.ref + ")" + item;
-        if (c.fork) item = " (fork " + c.fork.lane + " " + c.fork.minimizedCommitId + ")" + item;
-        item = "l " + c.lane + item;
-        console.log(item /* , c */);
-    });
-    console.groupEnd("metro-graph-model");
-};
 
 var RENDER_CONSTANTS = {
     circle_radius: 15,
@@ -206,8 +185,25 @@ svgViewGenerate = function(model) {
             $(path).appendTo(svg);
         }
     });
-
     _.each(model.log, function(commit) {
+        if (commit.ref) {
+            model.runningLanes.push(model.lanes[commit.lane]);
+        }
+        
+        var lane = isMergeLaneStart(commit, model);
+        if (lane) {
+            model.runningLanes.push(lane);
+            console.log("Commit %s is a merge, lane started %s.", commit.minimizedCommitId, lane.laneIndex);
+        }
+
+        lane = isFork(commit, model);
+        if (lane) {
+            console.log("Commit %s is a fork, lane stopped %s", commit.minimizedCommitId, lane.laneIndex);
+            var index = model.runningLanes.indexOf(lane);
+            if (index) {
+                model.runningLanes.splice(index, 1);
+            }
+        }
         var commitElement = createCommitElement(commit, model);
         // TODO pf: not supporting third and more parents now in prototype!
         // This has to be finished for release version!
@@ -218,7 +214,48 @@ svgViewGenerate = function(model) {
         }
         $(commitElement).appendTo($("g." + model.className(commit.lane)));
     });
+    
+    generateLabel();
 };
+
+function isMergeLaneStart(commit, model) {
+    return _.find(model.lanes, function(lane) {
+        return lane.start.commitId === commit.commitId;
+    });
+}
+
+function generateLabel() {
+    var g = document.createElementNS(svgns, "g");
+    g.setAttribute("transform", "translate(" + 55 + "," + 20 + ")");
+    var rect = document.createElementNS(svgns, "rect");
+    rect.setAttribute("rx", 15);
+    rect.setAttribute("ry", 15);
+//    rect.setAttribute("width", 100);
+    rect.setAttribute("height", 30);
+    rect.setAttribute("class", "master");
+    // <text x="0" y="10" font-family="Verdana" font-size="55" fill="blue" > Hello </text>
+    var text = document.createElementNS(svgns, "text");
+    text.setAttribute("x", 15);
+    text.setAttribute("y", 15);
+    text.setAttribute("alignment-baseline", "middle"); // text-anchor="middle"
+    //text.setAttribute("text-anchor", "middle");
+    text.setAttribute("font-family", "Verdana");
+    text.setAttribute("font-size", "20");
+    text.setAttribute("fill", "white");
+    text.appendChild(document.createTextNode("master"));
+    g.appendChild(rect);
+    g.appendChild(text);
+    getSvg().append(g);
+    rect.setAttribute("width", text.getBBox().width + 30);
+    console.log();
+
+
+}
+function isFork(commit, model) {
+    return _.find(model.lanes, function(lane) {
+        return lane.end.fork && lane.end.fork.commitId === commit.commitId;
+    });
+}
 
 function createMergePath(commit, model) {
     var secondParent = findCommit(model.log, commit.parents[1]);
@@ -238,6 +275,13 @@ function createMergePath(commit, model) {
 
     return path;
 };
+
+function rL(index, model) {
+    var l = model.lanes;
+    var renderl = model.runningLanes.indexOf(l[index]);
+    console.log(renderl);
+    return renderl;
+}
 
 function createForkPath(lane, model) {
     var path = document.createElementNS(svgns, "path");
@@ -264,14 +308,19 @@ function createForkPath(lane, model) {
  */
 function createCommitElement(commit, model) {
     var element = document.createElementNS(svgns, "circle");
-    
-    var cx = commit.lane * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
+    if (isFork(commit, model) || isMergeLaneStart(commit, model)) {
+    }
+    var cx = rL(commit.lane, model) * RENDER_CONSTANTS.step_x + RENDER_CONSTANTS.circle_centre_x;
     var cy = commit.seq * RENDER_CONSTANTS.step_y + RENDER_CONSTANTS.circle_centre_y;
     element.setAttribute("cx", cx);
     element.setAttribute("cy", cy);
     element.setAttribute("class", model.className(commit.lane));
     element.setAttribute("id", commit.seq);
     element.setAttribute("commit", commit.minimizedCommitId);
+    
+    var t = document.createElementNS(svgns, "title");
+    t.appendChild(document.createTextNode(commit.minimizedCommitId));
+    element.appendChild(t);
     
     return element;
 }
@@ -316,81 +365,8 @@ function findCommit(log, commitId) {
     var result = _.find(log, function(commit) {
         return commit.commitId === commitId;
     });
-    console.log(result);
     return result;
 }
-
-dump = function(model) {
-    console.groupCollapsed("metro-graph-model");
-    if (model.roots) {
-        _.each(model.roots, function(ref) {
-            console.log("reference '%s' points to '%s'", ref.ref, ref.sha);
-        });
-    }
-    if (model.log) {
-        console.log("model contains %s commits.", model.log.length);
-    }
-    console.groupEnd("metro-graph-model");
-};
- 
-var lane = {
-    class: "", /* lane styling, i.e. color etc. */
-    laneIndex: 0, /* current lane index */
-    last_oid: 0, /* last rendered commit */
-    visible: true, /* lane visible? */
-    label: '' /* ref name, represents item from roots */
-};
-
-function print() {
-    console.group("metro-graph-old");
-    _(this.log).each(function (commit) {
-        var title = commit.comment.split('\n')[0];
-        var index = _(this.lines).indexOf(commit.commitId);
-        commit = this.line(commit, commit.parents);
-        console.log("l " + commit.line + " (" + commit.kind + "): " + commit.minimizedCommitId + " " + title);
-    }, this);
-    console.groupEnd("metro-graph-old");
-
-};
- 
-function line(commit, parents) {
-    if (!parents.length) {
-        commit.kind = "initial";
-        commit.line = 0;
-        return commit;
-    }
-    var sha1 = commit.commitId;
-    commit.kind = "normal";
-    _(parents).each(function (p) {
-        var replace = sha1;
-        _(this.lines).each(function(l, i) {
-            if (l === sha1) {
-                if (replace) {
-                    commit.line = i;
-                } else {
-                    commit.kind += " fork " + i;
-                }
-                this.lines[i] = replace;
-                replace = null;
-            }
-        }, this); 
-        var index = _(this.lines).indexOf(sha1);
-        if (index !== -1) {
-            this.lines[index] = p;
-        } else {
-            var index =  _(this.lines).indexOf(null);
-            if (index === -1) {
-                this.lines.push(p);
-                index = this.lines.length-1;
-            } else {
-                this.lines[index] = p;
-            }
-            //commit.line = index;
-            commit.kind = "merge " + index;
-        }
-    }, this);
-    return commit;
-};
 
 return init;
 
